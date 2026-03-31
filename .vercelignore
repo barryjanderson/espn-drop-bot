@@ -1,0 +1,6 @@
+.venv
+venv
+__pycache__
+*.pyc
+.env
+seen_transactions.json
