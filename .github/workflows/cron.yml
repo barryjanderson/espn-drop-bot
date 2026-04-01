@@ -14,12 +14,15 @@ jobs:
         env:
           MONITOR_URL: ${{ secrets.MONITOR_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          VERCEL_BYPASS_TOKEN: ${{ secrets.VERCEL_BYPASS_TOKEN }}
         run: |
-          if [ -z "$MONITOR_URL" ] || [ -z "$CRON_SECRET" ]; then
-            echo "Set GitHub secrets MONITOR_URL and CRON_SECRET (repo Settings → Secrets)."
+          if [ -z "$MONITOR_URL" ] || [ -z "$CRON_SECRET" ] || [ -z "$VERCEL_BYPASS_TOKEN" ]; then
+            echo "Set GitHub secrets MONITOR_URL, CRON_SECRET, and VERCEL_BYPASS_TOKEN (repo Settings → Secrets)."
             exit 1
           fi
+          SEP='?'
+          if [[ "$MONITOR_URL" == *\?* ]]; then SEP='&'; fi
           curl -sS --fail-with-body \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             -H "Accept: application/json" \
-            "$MONITOR_URL"
+            "${MONITOR_URL}${SEP}x-vercel-protection-bypass=${VERCEL_BYPASS_TOKEN}"
