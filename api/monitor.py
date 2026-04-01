@@ -13,6 +13,7 @@ from pathlib import Path
 from upstash_redis import Redis
 
 from poll_once import run_poll_cycle
+from api.index import app  # WSGI fallback for Vercel runtime detection
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PLAYER_CACHE = _ROOT / "player_cache.json"
