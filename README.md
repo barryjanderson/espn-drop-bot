@@ -82,12 +82,6 @@ The first cloud poll with an **empty** Upstash key behaves like local: with `SEE
 | `drop_monitor.py` | Local poll loop + file-backed state |
 | `fetch_player_cache.py` | Refresh `player_cache.json` |
 
-## Security
-
-- Never commit `.env` or real cookie values (see [.gitignore](.gitignore)).
-- Rotate `ESPN_S2` / `SWID` if they leak.
-- Treat `CRON_SECRET` as a password: it gates `/api/monitor`.
-
 ## License
 
 [MIT](LICENSE)
