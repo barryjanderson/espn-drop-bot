@@ -1,1 +1,10 @@
-{}
+{
+  "functions": {
+    "api/monitor.py": {
+      "maxDuration": 10
+    },
+    "api/index.py": {
+      "maxDuration": 10
+    }
+  }
+}

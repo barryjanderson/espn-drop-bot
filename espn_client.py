@@ -1,5 +1,5 @@
 """
-Shared ESPN Fantasy API client for the drop bot POC.
+Shared ESPN Fantasy API client for the drop monitor.
 Credentials come from environment variables (see .env.example).
 """
 from __future__ import annotations
