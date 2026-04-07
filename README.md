@@ -65,7 +65,7 @@ Expect HTTP `200` and JSON (transaction count). Requests use **`lm-api-reads.fan
 
 5. **Player names** — [player_cache.json](player_cache.json) is committed so Discord embeds can resolve names in serverless (ESPN’s `mTransactions2` often omits full names). Regenerate with `python fetch_player_cache.py` and commit when the player pool changes meaningfully.
 
-6. **Timeouts** — Vercel Hobby functions are capped around **10s**. [vercel.json](vercel.json) sets `maxDuration` to 10 for the API handlers; the handler defaults to an **8s** ESPN timeout (`ESPN_FETCH_TIMEOUT_SEC`). If you hit timeouts, consider Vercel Pro for longer functions or tune the env var.
+6. **Timeouts** — Vercel Hobby functions are capped around **10s** by default. This repo keeps [vercel.json](vercel.json) minimal because Vercel’s `functions` patterns do not reliably match **Python** files in `api/` (setting `api/*.py` there can fail the build). If you need a higher limit on Pro, set **max duration** under Project → Settings → Functions. The handler defaults to an **8s** ESPN timeout (`ESPN_FETCH_TIMEOUT_SEC`); tune that env var if ESPN is slow.
 
 The first cloud poll with an **empty** Upstash key behaves like local: with `SEED_ON_FIRST_RUN` (default), existing drops are recorded **without** Discord spam.
 
